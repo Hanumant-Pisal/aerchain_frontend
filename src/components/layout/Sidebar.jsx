@@ -47,6 +47,7 @@ export default function Sidebar({ className = "" }) {
           <>
             <NavItem to="/dashboard">Admin Dashboard</NavItem>
             <NavItem to="/rfp/create">Create RFP</NavItem>
+            <NavItem to="/rfp/send">Send RFP</NavItem>
             <NavItem to="/rfps">All RFPs</NavItem>
             <NavItem to="/vendors">Vendors</NavItem>
             <NavItem to="/users">Users</NavItem>
@@ -59,6 +60,7 @@ export default function Sidebar({ className = "" }) {
           <>
             <NavItem to="/dashboard">Dashboard</NavItem>
             <NavItem to="/rfp/create">Create RFP</NavItem>
+            <NavItem to="/rfp/send">Send RFP</NavItem>
             <NavItem to="/rfps">My RFPs</NavItem>
             <NavItem to="/vendors">Vendors</NavItem>
             <NavItem to="/compare">Compare Proposals</NavItem>

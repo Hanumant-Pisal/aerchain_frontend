@@ -6,6 +6,7 @@ import Login from "../pages/Login";
 import VendorRegister from "../pages/VendorRegister";
 import CreateRFP from "../pages/CreateRFP";
 import RfpList from "../pages/RfpList";
+import SendRfp from "../pages/SendRfp";
 import VendorList from "../pages/VendorList";
 import ProposalComparison from "../pages/ProposalComparison";
 import useAuth, { useUserRole } from "../hooks/useAuth";
@@ -38,6 +39,7 @@ export default function AppRouter() {
             <>
               <Route path="/rfp/create" element={<CreateRFP />} />
               <Route path="/rfps" element={<RfpList />} />
+              <Route path="/rfp/send" element={<SendRfp />} />
               <Route path="/vendors" element={<VendorList />} />
               <Route path="/compare/:id" element={<ProposalComparison />} />
             </>

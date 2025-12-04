@@ -43,6 +43,9 @@ export default function Navbar() {
             <Link to="/rfp/create" className="text-sm text-slate-600 hover:text-slate-900">
               Create RFP
             </Link>
+            <Link to="/rfp/send" className="text-sm text-slate-600 hover:text-slate-900">
+              Send RFP
+            </Link>
             <Link to="/vendors" className="text-sm text-slate-600 hover:text-slate-900">
               Vendors
             </Link>
@@ -60,6 +63,9 @@ export default function Navbar() {
             </Link>
             <Link to="/rfp/create" className="text-sm text-slate-600 hover:text-slate-900">
               Create RFP
+            </Link>
+            <Link to="/rfp/send" className="text-sm text-slate-600 hover:text-slate-900">
+              Send RFP
             </Link>
             <Link to="/vendors" className="text-sm text-slate-600 hover:text-slate-900">
               Vendors
