@@ -6,9 +6,13 @@ import Login from "../pages/Login";
 import VendorRegister from "../pages/VendorRegister";
 import CreateRFP from "../pages/CreateRFP";
 import RfpList from "../pages/RfpList";
+import VendorRfps from "../pages/VendorRfps";
+import VendorProposals from "../pages/VendorProposals";
+import BuyerProposals from "../pages/BuyerProposals";
+import SubmitProposal from "../pages/SubmitProposal";
 import SendRfp from "../pages/SendRfp";
 import VendorList from "../pages/VendorList";
-import ProposalComparison from "../pages/ProposalComparison";
+import ProposalComparisonPage from "../pages/ProposalComparisonPage";
 import useAuth, { useUserRole } from "../hooks/useAuth";
 
 export default function AppRouter() {
@@ -39,9 +43,18 @@ export default function AppRouter() {
             <>
               <Route path="/rfp/create" element={<CreateRFP />} />
               <Route path="/rfps" element={<RfpList />} />
+              <Route path="/proposals" element={<BuyerProposals />} />
               <Route path="/rfp/send" element={<SendRfp />} />
               <Route path="/vendors" element={<VendorList />} />
-              <Route path="/compare/:id" element={<ProposalComparison />} />
+              <Route path="/compare/:id" element={<ProposalComparisonPage />} />
+            </>
+          )}
+          {userRole === "vendor" && (
+            <>
+              <Route path="/rfps" element={<VendorRfps />} />
+              <Route path="/rfp/:rfpId/submit-proposal" element={<SubmitProposal />} />
+              <Route path="/proposals" element={<VendorProposals />} />
+              <Route path="/profile" element={<div className="p-4"><h1>Company Profile</h1><p>Coming soon...</p></div>} />
             </>
           )}
         </>

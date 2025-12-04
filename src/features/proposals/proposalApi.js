@@ -14,7 +14,23 @@ export const proposalApi = createApi({
     compareProposals: builder.query({
       query: (id) => `/compare/${id}`,
     }),
+    getVendorProposals: builder.query({
+      query: () => "/vendor",
+    }),
+    getBuyerProposals: builder.query({
+      query: () => "/buyer",
+    }),
+    compareRfpProposals: builder.query({
+      query: (rfpId) => `/compare/${rfpId}`,
+    }),
+    submitProposal: builder.mutation({
+      query: (data) => ({
+        url: "/submit",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useCompareProposalsQuery } = proposalApi;
+export const { useCompareProposalsQuery, useGetVendorProposalsQuery, useGetBuyerProposalsQuery, useCompareRfpProposalsQuery, useSubmitProposalMutation } = proposalApi;

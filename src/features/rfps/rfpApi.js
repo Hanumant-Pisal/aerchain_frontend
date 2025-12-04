@@ -15,7 +15,12 @@ export const rfpApi = createApi({
       query: (data) => ({ url: "/create", method: "POST", body: data }),
     }),
     getRfps: builder.query({ query: () => "/" }),
+    getRfp: builder.query({ query: (id) => `/${id}` }),
+    getVendorRfps: builder.query({ query: () => "/vendor" }),
+    sendRfp: builder.mutation({
+      query: (data) => ({ url: "/send", method: "POST", body: data }),
+    }),
   }),
 });
 
-export const { useCreateRfpMutation, useGetRfpsQuery } = rfpApi;
+export const { useCreateRfpMutation, useGetRfpsQuery, useGetRfpQuery, useGetVendorRfpsQuery, useSendRfpMutation } = rfpApi;
