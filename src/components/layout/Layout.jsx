@@ -9,14 +9,22 @@ import Sidebar from "./Sidebar";
 export default function Layout({ children, rightSidebar = null }) {
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navbar />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex gap-6">
-        <Sidebar />
-        <main className="flex-1">
+      {/* Fixed Sidebar */}
+      <Sidebar />
+      
+      {/* Main content area with left margin for fixed sidebar */}
+      <div className="md:ml-76 flex flex-col min-h-screen">
+        {/* Navbar at top */}
+        <Navbar />
+        
+        {/* Page content below navbar */}
+        <main className="flex-1 overflow-y-auto">
           {children}
         </main>
-        {rightSidebar && <aside className="w-80 hidden lg:block">{rightSidebar}</aside>}
       </div>
+      
+      {/* Optional right sidebar */}
+      {rightSidebar && <aside className="w-80 hidden lg:block fixed right-0 top-16">{rightSidebar}</aside>}
     </div>
   );
 }

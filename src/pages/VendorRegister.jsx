@@ -30,7 +30,7 @@ export default function VendorRegister() {
       navigate("/dashboard");
     } catch (error) {
       console.error("Registration failed:", error);
-      alert("Registration failed. Please check your information.");
+      // Error is now handled by the API toast notification
     } finally {
       setIsLoading(false);
     }

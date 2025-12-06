@@ -75,61 +75,88 @@ export default function SubmitProposal() {
 
   return (
     <Layout>
-      <div className="p-4 max-w-4xl mx-auto">
-        <h1 className="text-2xl font-bold mb-6">Submit Proposal</h1>
+      <div className="p-6 max-w-6xl mx-auto">
+        {/* Header */}
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-900 to-pink-700 bg-clip-text text-transparent mb-2">
+            Submit Proposal
+          </h1>
+          <p className="text-gray-600">Create and submit your proposal for this RFP</p>
+        </div>
         
         {message && (
-          <div className={`mb-4 p-4 rounded-md ${
+          <div className={`mb-6 p-4 rounded-xl border shadow-sm ${
             message.includes("successfully") 
-              ? "bg-green-100 text-green-800" 
-              : "bg-red-100 text-red-800"
+              ? "bg-green-50 text-green-800 border-green-200" 
+              : "bg-red-50 text-red-800 border-red-200"
           }`}>
-            {message}
+            <div className="flex items-center">
+              <div className={`w-5 h-5 rounded-full mr-3 ${
+                message.includes("successfully") ? "bg-green-500" : "bg-red-500"
+              }`}></div>
+              {message}
+            </div>
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-8">
           {/* Basic Information */}
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-lg font-semibold mb-4">Proposal Details</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-lg border border-gray-100 p-8">
+            <div className="flex items-center mb-6">
+              <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-600 rounded-xl flex items-center justify-center mr-4">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <h2 className="text-xl font-bold text-gray-800">Proposal Details</h2>
+                <p className="text-sm text-gray-600">Basic information about your proposal</p>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
                   Total Price *
                 </label>
-                <input
-                  type="number"
-                  value={formData.totalPrice}
-                  onChange={(e) => setFormData({...formData, totalPrice: e.target.value})}
-                  className="border border-gray-300 p-2 w-full rounded-md focus:ring-blue-500 focus:border-blue-500"
-                  placeholder="100000"
-                  required
-                />
+                <div className="relative">
+                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
+                  <input
+                    type="number"
+                    value={formData.totalPrice}
+                    onChange={(e) => setFormData({...formData, totalPrice: e.target.value})}
+                    className="border border-gray-300 pl-8 pr-3 py-3 w-full rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200"
+                    placeholder="100,000"
+                    required
+                  />
+                </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
                   Delivery Days *
                 </label>
-                <input
-                  type="number"
-                  value={formData.deliveryDays}
-                  onChange={(e) => setFormData({...formData, deliveryDays: e.target.value})}
-                  className="border border-gray-300 p-2 w-full rounded-md focus:ring-blue-500 focus:border-blue-500"
-                  placeholder="30"
-                  required
-                />
+                <div className="relative">
+                  <input
+                    type="number"
+                    value={formData.deliveryDays}
+                    onChange={(e) => setFormData({...formData, deliveryDays: e.target.value})}
+                    className="border border-gray-300 pr-12 pl-3 py-3 w-full rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200"
+                    placeholder="30"
+                    required
+                  />
+                  <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">days</span>
+                </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
                   Payment Terms *
                 </label>
                 <select
                   value={formData.paymentTerms}
                   onChange={(e) => setFormData({...formData, paymentTerms: e.target.value})}
-                  className="border border-gray-300 p-2 w-full rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  className="border border-gray-300 px-3 py-3 w-full rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200"
                   required
                 >
-                  <option value="">Select terms</option>
+                  <option value="">Select payment terms</option>
                   <option value="net 15">Net 15</option>
                   <option value="net 30">Net 30</option>
                   <option value="net 45">Net 45</option>
@@ -138,16 +165,16 @@ export default function SubmitProposal() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
                   Warranty Period *
                 </label>
                 <select
                   value={formData.warranty}
                   onChange={(e) => setFormData({...formData, warranty: e.target.value})}
-                  className="border border-gray-300 p-2 w-full rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  className="border border-gray-300 px-3 py-3 w-full rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200"
                   required
                 >
-                  <option value="">Select warranty</option>
+                  <option value="">Select warranty period</option>
                   <option value="6 months">6 months</option>
                   <option value="1 year">1 year</option>
                   <option value="2 years">2 years</option>
@@ -159,60 +186,109 @@ export default function SubmitProposal() {
           </div>
 
           {/* Items */}
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg font-semibold">Items & Pricing</h2>
+          <div className="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-lg border border-gray-100 p-8">
+            <div className="flex justify-between items-center mb-6">
+              <div className="flex items-center">
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center mr-4">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                  </svg>
+                </div>
+                <div>
+                  <h2 className="text-xl font-bold text-gray-800">Items & Pricing</h2>
+                  <p className="text-sm text-gray-600">Add items and their specifications</p>
+                </div>
+              </div>
               <button
                 type="button"
                 onClick={addItem}
-                className="px-4 py-2 text-sm bg-green-600 text-white rounded-md hover:bg-green-700"
+                className="px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-xl font-medium hover:from-green-700 hover:to-emerald-700 transition-all duration-200 shadow-md hover:shadow-lg flex items-center space-x-2"
               >
-                Add Item
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                </svg>
+                <span>Add Item</span>
               </button>
             </div>
             
             {formData.items.length === 0 ? (
-              <p className="text-gray-500 text-center py-4">No items added. Click "Add Item" to get started.</p>
+              <div className="text-center py-12">
+                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-semibold text-gray-800 mb-2">No Items Added</h3>
+                <p className="text-gray-600 mb-4">Start by adding items to your proposal</p>
+                <button
+                  type="button"
+                  onClick={addItem}
+                  className="px-6 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-medium hover:from-purple-700 hover:to-pink-700 transition-all duration-200"
+                >
+                  Add Your First Item
+                </button>
+              </div>
             ) : (
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {formData.items.map((item, index) => (
-                  <div key={index} className="border border-gray-200 rounded-lg p-4">
-                    <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
-                      <input
-                        type="text"
-                        placeholder="Item name"
-                        value={item.name}
-                        onChange={(e) => handleItemChange(index, 'name', e.target.value)}
-                        className="border border-gray-300 p-2 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                      />
-                      <input
-                        type="number"
-                        placeholder="Qty"
-                        value={item.qty}
-                        onChange={(e) => handleItemChange(index, 'qty', e.target.value)}
-                        className="border border-gray-300 p-2 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                      />
-                      <input
-                        type="number"
-                        placeholder="Unit price"
-                        value={item.unitPrice}
-                        onChange={(e) => handleItemChange(index, 'unitPrice', e.target.value)}
-                        className="border border-gray-300 p-2 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                      />
-                      <input
-                        type="text"
-                        placeholder="Specs"
-                        value={item.specs}
-                        onChange={(e) => handleItemChange(index, 'specs', e.target.value)}
-                        className="border border-gray-300 p-2 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                      />
+                  <div key={index} className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-200">
+                    <div className="flex items-center justify-between mb-4">
+                      <h4 className="font-semibold text-gray-800">Item {index + 1}</h4>
                       <button
                         type="button"
                         onClick={() => removeItem(index)}
-                        className="px-3 py-2 text-sm bg-red-600 text-white rounded-md hover:bg-red-700"
+                        className="px-4 py-2 bg-gradient-to-r from-red-600 to-pink-600 text-white rounded-lg font-medium hover:from-red-700 hover:to-pink-700 transition-all duration-200 flex items-center space-x-2"
                       >
-                        Remove
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                        <span>Remove</span>
                       </button>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Item Name</label>
+                        <input
+                          type="text"
+                          placeholder="Enter item name"
+                          value={item.name}
+                          onChange={(e) => handleItemChange(index, 'name', e.target.value)}
+                          className="border border-gray-300 px-3 py-2 w-full rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Quantity</label>
+                        <input
+                          type="number"
+                          placeholder="Qty"
+                          value={item.qty}
+                          onChange={(e) => handleItemChange(index, 'qty', e.target.value)}
+                          className="border border-gray-300 px-3 py-2 w-full rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Unit Price</label>
+                        <div className="relative">
+                          <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
+                          <input
+                            type="number"
+                            placeholder="0.00"
+                            value={item.unitPrice}
+                            onChange={(e) => handleItemChange(index, 'unitPrice', e.target.value)}
+                            className="border border-gray-300 pl-8 pr-3 py-2 w-full rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200"
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Specifications</label>
+                        <input
+                          type="text"
+                          placeholder="Technical specs"
+                          value={item.specs}
+                          onChange={(e) => handleItemChange(index, 'specs', e.target.value)}
+                          className="border border-gray-300 px-3 py-2 w-full rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200"
+                        />
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -221,29 +297,54 @@ export default function SubmitProposal() {
           </div>
 
           {/* Additional Notes */}
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-lg font-semibold mb-4">Additional Information</h2>
+          <div className="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-lg border border-gray-100 p-8">
+            <div className="flex items-center mb-6">
+              <div className="w-12 h-12 bg-gradient-to-br from-amber-600 to-orange-600 rounded-xl flex items-center justify-center mr-4">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                </svg>
+              </div>
+              <div>
+                <h2 className="text-xl font-bold text-gray-800">Additional Information</h2>
+                <p className="text-sm text-gray-600">Any extra details about your proposal</p>
+              </div>
+            </div>
             <textarea
               value={formData.additionalNotes}
               onChange={(e) => setFormData({...formData, additionalNotes: e.target.value})}
-              className="border border-gray-300 p-2 w-full rounded-md focus:ring-blue-500 focus:border-blue-500"
-              rows={4}
-              placeholder="Any additional information about your proposal..."
+              className="border border-gray-300 px-4 py-3 w-full rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 resize-none"
+              rows={6}
+              placeholder="Provide any additional information, terms, or special conditions that would be relevant to your proposal..."
             />
           </div>
 
           {/* Submit Button */}
-          <div className="flex justify-center">
+          <div className="flex justify-center pt-4">
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`px-8 py-3 rounded-md font-medium transition-colors ${
+              className={`px-12 py-4 rounded-2xl font-bold text-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-[1.02] ${
                 isSubmitting
                   ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                  : "bg-blue-600 text-white hover:bg-blue-700"
+                  : "bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700"
               }`}
             >
-              {isSubmitting ? "Submitting..." : "Submit Proposal"}
+              {isSubmitting ? (
+                <span className="flex items-center space-x-3">
+                  <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  <span>Submitting Proposal...</span>
+                </span>
+              ) : (
+                <span className="flex items-center space-x-3">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                  </svg>
+                  <span>Submit Proposal</span>
+                </span>
+              )}
             </button>
           </div>
         </form>
