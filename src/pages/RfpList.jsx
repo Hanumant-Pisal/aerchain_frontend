@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 export default function RfpList() {
-  const { data: rfps = [], isLoading, error } = useGetRfpsQuery();
+  const { data: rfpsResponse = { data: [] }, isLoading, error } = useGetRfpsQuery();
+  const rfps = rfpsResponse.data || [];
   const [deleteRfp] = useDeleteRfpMutation();
   const [deletingId, setDeletingId] = useState(null);
 

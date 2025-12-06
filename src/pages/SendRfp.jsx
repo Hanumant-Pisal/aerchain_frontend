@@ -4,7 +4,8 @@ import { useGetVendorsQuery } from "../features/vendors/vendorApi";
 import { useState } from "react";
 
 export default function SendRfp() {
-  const { data: rfps = [], isLoading: rfpsLoading, refetch: refetchRfps } = useGetRfpsQuery();
+  const { data: rfpsResponse = { data: [] }, isLoading: rfpsLoading, refetch: refetchRfps } = useGetRfpsQuery();
+  const rfps = rfpsResponse.data || [];
   const { data: vendors = [], isLoading: vendorsLoading } = useGetVendorsQuery();
   const [selectedRfp, setSelectedRfp] = useState("");
   const [selectedVendors, setSelectedVendors] = useState([]);

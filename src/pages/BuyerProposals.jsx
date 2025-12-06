@@ -1,11 +1,34 @@
 import Layout from "../components/layout/Layout";
-import { useState } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { useGetBuyerProposalsQuery } from "../features/proposals/proposalApi";
 import { Link } from "react-router-dom";
+import React from "react";
 
 export default function BuyerProposals() {
   const { data: proposals = [], isLoading, error } = useGetBuyerProposalsQuery();
   const [selectedProposal, setSelectedProposal] = useState(null);
+
+  const proposalsByRfp = useMemo(() => {
+    return proposals.reduce((acc, proposal) => {
+      const rfpId = proposal.rfp?._id;
+      if (!acc[rfpId]) {
+        acc[rfpId] = {
+          rfp: proposal.rfp,
+          proposals: []
+        };
+      }
+      acc[rfpId].proposals.push(proposal);
+      return acc;
+    }, {});
+  }, [proposals]);
+
+  const handleSelectProposal = useCallback((proposal) => {
+    setSelectedProposal(proposal);
+  }, []);
+
+  const handleCloseModal = useCallback(() => {
+    setSelectedProposal(null);
+  }, []);
 
   if (isLoading) {
     return (
@@ -36,19 +59,6 @@ export default function BuyerProposals() {
       </Layout>
     );
   }
-
-  // Group proposals by RFP
-  const proposalsByRfp = proposals.reduce((acc, proposal) => {
-    const rfpId = proposal.rfp?._id;
-    if (!acc[rfpId]) {
-      acc[rfpId] = {
-        rfp: proposal.rfp,
-        proposals: []
-      };
-    }
-    acc[rfpId].proposals.push(proposal);
-    return acc;
-  }, {});
 
   return (
     <Layout>

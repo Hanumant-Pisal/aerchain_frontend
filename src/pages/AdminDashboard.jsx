@@ -8,7 +8,8 @@ import { Link } from "react-router-dom";
 export default function AdminDashboard() {
   const { data: buyers = [], isLoading: buyersLoading } = useGetBuyersQuery();
   const { data: vendors = [], isLoading: vendorsLoading } = useGetVendorsQuery();
-  const { data: rfps = [], isLoading: rfpsLoading } = useGetRfpsQuery();
+  const { data: rfpsResponse = { data: [] }, isLoading: rfpsLoading } = useGetRfpsQuery();
+  const rfps = rfpsResponse.data || [];
   const { data: proposals = [], isLoading: proposalsLoading } = useGetBuyerProposalsQuery();
   const { data: systemHealth, isLoading: healthLoading } = useGetSystemHealthQuery();
 

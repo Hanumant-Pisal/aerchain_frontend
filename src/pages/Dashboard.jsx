@@ -7,23 +7,20 @@ import { useSelector } from "react-redux";
 
 export default function BuyerDashboard() {
   const user = useSelector((state) => state.auth.user);
-  const { data: rfps = [], isLoading: rfpsLoading } = useGetRfpsQuery(undefined, {
-    // Force refetch when user changes
+  const { data: rfpsResponse = { data: [] }, isLoading: rfpsLoading } = useGetRfpsQuery(undefined, {
     refetchOnMountOrArgChange: true,
     skip: !user,
   });
+  const rfps = rfpsResponse.data || [];
   const { data: proposals = [], isLoading: proposalsLoading } = useGetBuyerProposalsQuery(undefined, {
-    // Force refetch when user changes
     refetchOnMountOrArgChange: true,
     skip: !user,
   });
   const { data: vendors = [], isLoading: vendorsLoading } = useGetVendorsQuery(undefined, {
-    // Force refetch when user changes
     refetchOnMountOrArgChange: true,
     skip: !user,
   });
 
-  // Calculate stats
   const activeRfps = rfps.filter(rfp => rfp.status !== 'Closed').length;
   const pendingProposals = proposals.filter(proposal => proposal.status === 'Pending').length;
   const activeVendors = vendors.length;
