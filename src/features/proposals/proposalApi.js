@@ -13,10 +13,7 @@ export const proposalApi = createApi({
   }),
   tagTypes: ['Proposal'],
   endpoints: (builder) => ({
-    compareProposals: builder.query({
-      query: (id) => `/compare/${id}`,
-    }),
-    getVendorProposals: builder.query({
+        getVendorProposals: builder.query({
       query: () => "/vendor",
       providesTags: ['Proposal']
     }),
@@ -46,4 +43,4 @@ export const proposalApi = createApi({
   }),
 });
 
-export const { useCompareProposalsQuery, useGetVendorProposalsQuery, useGetBuyerProposalsQuery, useCompareRfpProposalsQuery, useSubmitProposalMutation } = proposalApi;
+export const { useGetVendorProposalsQuery, useGetBuyerProposalsQuery, useCompareRfpProposalsQuery, useSubmitProposalMutation } = proposalApi;
