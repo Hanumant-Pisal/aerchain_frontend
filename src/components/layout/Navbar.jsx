@@ -72,9 +72,7 @@ export default function Navbar() {
                     <p className="text-sm font-medium text-gray-900">
                       {auth.user.name || auth.user.email}
                     </p>
-                    <p className="text-xs text-gray-500">
-                      {auth.user.role?.charAt(0)?.toUpperCase() + auth.user.role?.slice(1)}
-                    </p>
+                    
                   </div>
                   <svg
                     className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`}
@@ -90,26 +88,13 @@ export default function Navbar() {
                 {isDropdownOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
                     <div className="px-4 py-3 border-b border-gray-100">
-                      <p className="text-sm font-medium text-gray-900">
-                        {auth.user.name || auth.user.email}
-                      </p>
-                      <div className="flex items-center mt-1">
+                     {auth.user.email}
+                      <div className="flex items-center mt-1 mt-2">
                         {getRoleBadge()}
                       </div>
                     </div>
                     <div className="py-1">
-                      <Link
-                        to="/profile"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors duration-200"
-                        onClick={() => setIsDropdownOpen(false)}
-                      >
-                        <div className="flex items-center space-x-2">
-                          <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                          </svg>
-                          <span>Profile</span>
-                        </div>
-                      </Link>
+                     
                       <button
                         onClick={handleLogout}
                         className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors duration-200"

@@ -173,11 +173,9 @@ export default function Sidebar({ className = "" }) {
         {/* Logo Section */}
         <div className="p-6">
           <Link to="/dashboard" className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-lg">
-              <span className="text-purple-600 font-bold text-lg">AI</span>
-            </div>
+           
             <span className="text-xl font-bold text-white">
-              RFP System
+              Ai Power RFP System
             </span>
           </Link>
         </div>

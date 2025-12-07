@@ -34,14 +34,7 @@ export default function Login() {
       {/* Login card */}
       <div className="w-full max-w-md">
         <div className="bg-white shadow-2xl rounded-3xl p-8">
-          {/* Logo/Icon area */}
-          <div className="flex justify-center mb-8">
-            <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-purple-100">
-              <svg className="w-10 h-10 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
-              </svg>
-            </div>
-          </div>
+          
 
           <h1 className="text-3xl font-bold text-center mb-2 text-gray-900">
             Welcome
@@ -62,7 +55,7 @@ export default function Login() {
                 <input 
                   name="email" 
                   type="email"
-                  placeholder="Enter your email" 
+                  placeholder="pisalhanumant12@gmail.com" 
                   className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-gray-50 transition-all duration-200"
                   required
                 />
@@ -82,7 +75,7 @@ export default function Login() {
                 <input 
                   name="password" 
                   type="password" 
-                  placeholder="Enter your password" 
+                  placeholder="password" 
                   className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-gray-50 transition-all duration-200"
                   required
                 />
@@ -94,7 +87,6 @@ export default function Login() {
                 <input type="checkbox" className="w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500" />
                 <span className="ml-2 text-sm text-gray-600">Remember me</span>
               </label>
-              <a href="#" className="text-sm text-purple-600 hover:text-purple-700 font-medium">Forgot password?</a>
             </div>
             
             <button 

@@ -310,9 +310,7 @@ export default function BuyerProposals() {
                               <button className="px-3 py-1 text-xs bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors font-medium">
                                 View Details
                               </button>
-                              <button className="px-3 py-1 text-xs bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg hover:from-green-700 hover:to-emerald-700 transition-all duration-200 font-medium">
-                                Accept
-                              </button>
+                             
                             </div>
                           </div>
                         </div>

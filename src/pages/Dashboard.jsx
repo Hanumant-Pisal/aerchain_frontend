@@ -138,7 +138,7 @@ export default function BuyerDashboard() {
             <h2 className="text-xl font-bold text-gray-800">Recent RFPs</h2>
             <Link to="/rfps" className="text-purple-600 hover:text-purple-700 text-sm font-medium">View All</Link>
           </div>
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-200">
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
             {rfps.length === 0 ? (
               <div className="p-8 text-center">
                 <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -153,34 +153,42 @@ export default function BuyerDashboard() {
                 </Link>
               </div>
             ) : (
-              <div className="divide-y divide-gray-100">
-                {rfps.slice(0, 5).map((rfp) => (
-                  <div key={rfp._id} className="p-4 hover:bg-gray-50 transition-colors">
-                    <div className="flex items-center justify-between">
-                      <div className="flex-1">
-                        <h3 className="font-semibold text-gray-800">{rfp.title}</h3>
-                        <div className="flex items-center space-x-4 mt-1 text-sm text-gray-600">
-                          <span>Budget: ${rfp.structured?.budget?.toLocaleString() || 'N/A'}</span>
-                          <span>•</span>
-                          <span>Created: {new Date(rfp.createdAt).toLocaleDateString()}</span>
-                        </div>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                          rfp.status === 'Draft' ? 'bg-gray-100 text-gray-800' :
-                          rfp.status === 'Sent' ? 'bg-blue-100 text-blue-800' :
-                          rfp.status === 'Closed' ? 'bg-red-100 text-red-800' :
-                          'bg-green-100 text-green-800'
-                        }`}>
-                          {rfp.status}
-                        </span>
-                        <Link to={`/rfps/${rfp._id}`} className="text-purple-600 hover:text-purple-700 text-sm font-medium">
-                          View
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-gray-50 border-b border-gray-200">
+                    <tr>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">RFP Title</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Budget</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Created Date</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white divide-y divide-gray-100">
+                    {rfps.slice(0, 5).map((rfp) => (
+                      <tr key={rfp._id} className="hover:bg-gray-50 transition-colors">
+                        <td className="px-6 py-4">
+                          <div className="text-sm font-medium text-gray-900">{rfp.title}</div>
+                        </td>
+                        <td className="px-6 py-4">
+                          <div className="text-sm text-gray-900">${rfp.structured?.budget?.toLocaleString() || 'N/A'}</div>
+                        </td>
+                        <td className="px-6 py-4">
+                          <div className="text-sm text-gray-900">{new Date(rfp.createdAt).toLocaleDateString()}</div>
+                        </td>
+                        <td className="px-6 py-4">
+                          <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                            rfp.status === 'Draft' ? 'bg-gray-100 text-gray-800' :
+                            rfp.status === 'Sent' ? 'bg-blue-100 text-blue-800' :
+                            rfp.status === 'Closed' ? 'bg-red-100 text-red-800' :
+                            'bg-green-100 text-green-800'
+                          }`}>
+                            {rfp.status}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             )}
           </div>
