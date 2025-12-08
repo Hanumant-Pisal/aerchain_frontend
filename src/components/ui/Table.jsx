@@ -1,10 +1,6 @@
 import React from "react";
 
-/**
- * Basic responsive table component
- * columns: [{ key, label, render?(row) }]
- * data: array
- */
+
 export default function Table({ columns = [], data = [], className = "" }) {
   return (
     <div className={`overflow-x-auto bg-white rounded-md shadow-sm ${className}`}>

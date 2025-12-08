@@ -15,7 +15,6 @@ export default function RfpList() {
       try {
         await deleteRfp(id);
       } catch (error) {
-        // Error is handled by the API toast notification
       } finally {
         setDeletingId(null);
       }
@@ -101,7 +100,6 @@ export default function RfpList() {
   return (
     <Layout>
       <div className="p-6">
-        {/* Header with Create Button */}
         <div className="mb-8">
           <div className="flex items-center justify-between">
             <div>
@@ -122,7 +120,6 @@ export default function RfpList() {
           </div>
         </div>
 
-        {/* RFP Cards */}
         {rfps.length === 0 ? (
           <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 text-center">
             <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">

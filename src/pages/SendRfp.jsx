@@ -1,16 +1,17 @@
 import Layout from "../components/layout/Layout";
 import { useGetRfpsQuery } from "../features/rfps/rfpApi";
 import { useGetVendorsQuery } from "../features/vendors/vendorApi";
+import { useSendRfpMutation } from "../features/rfps/rfpApi";
 import { useState } from "react";
+import { showError } from "../utils/toast";
 
 export default function SendRfp() {
   const { data: rfpsResponse = { data: [] }, isLoading: rfpsLoading, refetch: refetchRfps } = useGetRfpsQuery();
   const rfps = rfpsResponse.data || [];
   const { data: vendors = [], isLoading: vendorsLoading } = useGetVendorsQuery();
+  const [sendRfp, { isLoading: isSending }] = useSendRfpMutation();
   const [selectedRfp, setSelectedRfp] = useState("");
   const [selectedVendors, setSelectedVendors] = useState([]);
-  const [isSending, setIsSending] = useState(false);
-  const [message, setMessage] = useState("");
   const [showVendorModal, setShowVendorModal] = useState(false);
 
   const handleVendorToggle = (vendorId) => {
@@ -23,37 +24,22 @@ export default function SendRfp() {
 
   const handleSendRfp = async () => {
     if (!selectedRfp || selectedVendors.length === 0) {
-      alert("Please select an RFP and at least one vendor");
+      showError("Please select an RFP and at least one vendor");
       return;
     }
 
-    setIsSending(true);
     try {
-      const token = localStorage.getItem("token");
-      const response = await fetch("/api/rfps/send", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
-        },
-        body: JSON.stringify({
-          rfpId: selectedRfp,
-          vendorIds: selectedVendors
-        })
-      });
-
-      if (response.ok) {
-        setMessage("RFP sent successfully to selected vendors!");
-        setSelectedRfp("");
-        setSelectedVendors([]);
-      } else {
-        const error = await response.json();
-        setMessage(`Failed to send RFP: ${error.message}`);
-      }
+      await sendRfp({
+        rfpId: selectedRfp,
+        vendorIds: selectedVendors
+      }).unwrap();
+      
+      setSelectedRfp("");
+      setSelectedVendors([]);
+      
+      refetchRfps();
     } catch (error) {
-      setMessage(`Error: ${error.message}`);
-    } finally {
-      setIsSending(false);
+      console.error('Failed to send RFP:', error);
     }
   };
 
@@ -110,17 +96,6 @@ export default function SendRfp() {
           </div>
         </div>
         
-        {message && (
-          <div className={`mb-6 p-4 rounded-xl border ${
-            message.includes("successfully") 
-              ? "bg-green-50 text-green-800 border-green-200" 
-              : "bg-red-50 text-red-800 border-red-200"
-          }`}>
-            {message}
-          </div>
-        )}
-
-        {/* RFP Selection Table */}
         <div className="mb-8">
          
           {rfps.length === 0 ? (
@@ -138,7 +113,6 @@ export default function SendRfp() {
             </div>
           ) : (
             <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-              {/* Table Header */}
               <div className="p-4 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-gray-100">
                 <div className="flex items-center justify-end">
                   
@@ -146,7 +120,6 @@ export default function SendRfp() {
                 </div>
               </div>
 
-              {/* Table */}
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead className="bg-gray-50 border-b border-gray-200">

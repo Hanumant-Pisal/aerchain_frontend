@@ -27,7 +27,7 @@ export default function VendorList() {
     setDeletingId(vendorId);
     try {
       await deleteVendor(vendorId).unwrap();
-      // Cache will automatically invalidate and refetch
+      
     } catch (error) {
       alert("Failed to delete vendor: " + (error.message || "Unknown error"));
     } finally {
@@ -197,7 +197,7 @@ export default function VendorList() {
           </div>
         ) : (
           <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-            {/* Table Header */}
+           
             <div className="p-4 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-gray-100">
               <div className="flex items-center justify-end">
                 
@@ -205,7 +205,7 @@ export default function VendorList() {
               </div>
             </div>
 
-            {/* Table */}
+           
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead className="bg-gray-50 border-b border-gray-200">

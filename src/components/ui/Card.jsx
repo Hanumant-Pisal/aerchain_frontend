@@ -1,8 +1,6 @@
 import React from "react";
 
-/**
- * Simple Card wrapper with header/footer slots
- */
+
 export default function Card({ title, children, footer, className = "" }) {
   return (
     <div className={`bg-white shadow-sm rounded-md overflow-hidden ${className}`}>
