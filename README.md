@@ -1,16 +1,36 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Name: RFP System Frontend
 
-Currently, two official plugins are available:
+Tech Stack: Runtime: React 19 Build Tool: Vite Language: JavaScript Styling: Tailwind CSS State Management: Redux Toolkit Routing: React Router DOM HTTP Client: Axios Notifications: React Toastify Development: ESLint
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Features: Modern React Application Built with React 19 and latest features Component-based architecture Hooks-based development
 
-## React Compiler
+State Management Redux Toolkit for global state Efficient state updates Middleware support
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Routing System React Router DOM for navigation Protected routes Dynamic routing
 
-## Expanding the ESLint configuration
+User Interface Tailwind CSS for styling Responsive design Modern UI components Toast notifications
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+API Integration Axios for HTTP requests Error handling Request/response interceptors
+
+Development Experience Hot Module Replacement with Vite Fast development server ESLint for code quality Optimized build process
+
+Local Run Setup
+
+Prerequisites: Node.js version 14 or higher npm or yarn package manager
+
+Installation Steps:
+
+Clone the repository git clone  https://github.com/Hanumant-Pisal/aerchain_frontend
+
+Install dependencies npm install
+
+Start the development server npm run dev
+
+The application will be available at: http://localhost:5173
+
+Available Scripts: npm run dev - start development server npm run build - build for production npm run lint - run ESLint npm run preview - preview production build
+
+Environment Configuration: Make sure the backend server is running on port 8000 API endpoints are configured in the services directory
+
+Author: Hanumant Pisal

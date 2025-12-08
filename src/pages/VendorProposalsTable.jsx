@@ -49,7 +49,7 @@ export default function VendorProposals() {
   return (
     <Layout>
       <div className="p-6">
-        {/* Header */}
+       
         <div className="mb-8">
           <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-900 to-pink-700 bg-clip-text text-transparent">
             My Proposals
@@ -69,7 +69,7 @@ export default function VendorProposals() {
           </div>
         ) : (
           <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-            {/* Table Header */}
+           
             <div className="p-4 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-gray-100">
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-semibold text-gray-800">Proposal List</h3>
@@ -77,7 +77,7 @@ export default function VendorProposals() {
               </div>
             </div>
 
-            {/* Table */}
+        
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead className="bg-gray-50 border-b border-gray-200">
@@ -171,12 +171,12 @@ export default function VendorProposals() {
                         </td>
                       </tr>
                       
-                      {/* Inline Details Row */}
+                  
                       {selectedProposal === proposal._id && (
                         <tr>
                           <td colSpan="6" className="px-0 py-0 bg-gray-50">
                             <div className="p-6 border-l-4 border-green-500">
-                              {/* Details Header */}
+                           
                               <div className="mb-4">
                                 <h3 className="text-xl font-bold text-gray-900 mb-2">
                                   {proposal.rfp?.title || "Unknown RFP"}
@@ -201,7 +201,7 @@ export default function VendorProposals() {
                                 </div>
                               </div>
 
-                              {/* Key Metrics */}
+                              
                               <div className="mb-6">
                                 <h4 className="text-lg font-semibold text-gray-900 mb-3">Proposal Details</h4>
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -255,7 +255,7 @@ export default function VendorProposals() {
                                 </div>
                               </div>
 
-                              {/* Score and Completeness */}
+                             
                               <div className="flex items-center space-x-4 mb-6">
                                 <div className="bg-gray-50 px-4 py-3 rounded-lg border border-gray-200">
                                   <div className="flex items-center">
@@ -272,7 +272,7 @@ export default function VendorProposals() {
                                 </div>
                               </div>
 
-                              {/* Line Items */}
+                              
                               {proposal.parsed?.lineItems && proposal.parsed.lineItems.length > 0 && (
                                 <div className="mb-6">
                                   <h4 className="text-lg font-semibold text-gray-900 mb-3">Proposed Items</h4>
@@ -296,7 +296,7 @@ export default function VendorProposals() {
                                 </div>
                               )}
 
-                              {/* Additional Notes */}
+                          
                               {proposal.aiSummary && (
                                 <div className="mb-6">
                                   <h4 className="text-lg font-semibold text-gray-900 mb-3">AI Summary</h4>
@@ -306,7 +306,7 @@ export default function VendorProposals() {
                                 </div>
                               )}
 
-                              {/* Contact and Submission Details */}
+                            
                               <div className="mb-6">
                                 <h4 className="text-lg font-semibold text-gray-900 mb-3">Submission Details</h4>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -328,7 +328,7 @@ export default function VendorProposals() {
                                 </div>
                               </div>
 
-                              {/* Attachments */}
+                              
                               {proposal.attachments && proposal.attachments.length > 0 && (
                                 <div className="mb-6">
                                   <h4 className="text-lg font-semibold text-gray-900 mb-3">Attachments</h4>
@@ -347,7 +347,7 @@ export default function VendorProposals() {
                                 </div>
                               )}
 
-                              {/* Action Button */}
+                            
                               <div className="flex justify-end">
                                 <button className="px-6 py-2 text-gray-700 bg-gray-200 hover:bg-gray-300 rounded-lg transition-colors font-medium">
                                   Edit Proposal

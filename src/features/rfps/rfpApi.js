@@ -89,11 +89,13 @@ export const rfpApi = createApi({
       onQueryStarted: async (arg, { queryFulfilled }) => {
         try {
           const result = await queryFulfilled;
-          const { success, failed, total } = result.data;
-          if (success > 0) {
-            showSuccess(`RFP sent to ${success} vendor${success > 1 ? 's' : ''}!${failed > 0 ? ` (${failed} failed)` : ''}`);
+          const { sent, failed, total } = result.data.emailResults;
+          if (failed === 0) {
+            showSuccess(`RFP sent successfully to ${sent} vendor${sent > 1 ? 's' : ''}!`);
+          } else if (sent > 0) {
+            showSuccess(`RFP sent to ${sent} vendor${sent > 1 ? 's' : ''}. ${failed} email${failed > 1 ? 's' : ''} failed.`);
           } else {
-            showError("Failed to send RFP to any vendor");
+            showError("Failed to send RFP emails. Please try again.");
           }
         } catch (error) {
           showError(error.error?.data?.message || "Failed to send RFP");

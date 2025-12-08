@@ -15,7 +15,7 @@ export default function Buyers() {
     setDeletingId(buyerId);
     try {
       await deleteBuyer(buyerId).unwrap();
-      // Cache will automatically invalidate and refetch
+      
     } catch (error) {
       alert("Failed to delete buyer: " + (error.message || "Unknown error"));
     } finally {
@@ -71,14 +71,14 @@ export default function Buyers() {
           </div>
         ) : (
           <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-            {/* Table Header */}
+            
             <div className="p-4 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-gray-100">
               <div className="flex items-center justify-end">
                 <span className="text-sm text-gray-600">{buyers.length} buyer{buyers.length !== 1 ? 's' : ''}</span>
               </div>
             </div>
 
-            {/* Table */}
+            
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead className="bg-gray-50 border-b border-gray-200">

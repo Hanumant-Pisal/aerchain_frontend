@@ -7,17 +7,14 @@ import { useSelector } from "react-redux";
 export default function VendorDashboard() {
   const user = useSelector((state) => state.auth.user);
   const { data: rfps = [], isLoading: rfpsLoading } = useGetVendorRfpsQuery(undefined, {
-    // Force refetch when user changes
     refetchOnMountOrArgChange: true,
     skip: !user,
   });
   const { data: proposals = [], isLoading: proposalsLoading } = useGetVendorProposalsQuery(undefined, {
-    // Force refetch when user changes
     refetchOnMountOrArgChange: true,
     skip: !user,
   });
 
-  // Calculate stats
   const receivedRfps = rfps.length;
   const submittedProposals = proposals.length;
   const awardedContracts = proposals.filter(p => p.status === 'Accepted').length;
@@ -37,7 +34,7 @@ export default function VendorDashboard() {
   return (
     <Layout>
       <div className="p-6">
-        {/* Header */}
+        
         <div className="mb-8">
           <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-900 to-pink-700 bg-clip-text text-transparent">
             Vendor Dashboard
@@ -45,7 +42,7 @@ export default function VendorDashboard() {
           <p className="text-gray-600 mt-2">Manage your RFPs and track proposal status</p>
         </div>
 
-        {/* Stats Cards */}
+       
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
           <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-xl border border-blue-200 hover:shadow-lg transition-shadow duration-300">
             <div className="flex items-center justify-between mb-2">
@@ -90,7 +87,7 @@ export default function VendorDashboard() {
           </div>
         </div>
 
-        {/* Recent RFPs */}
+      
         <div>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-bold text-gray-800">Recent RFPs</h2>

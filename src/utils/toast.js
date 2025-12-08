@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 
-// Success notifications
+
 export const showSuccess = (message) => {
   return toast.success(message, {
     position: "top-right",
@@ -13,7 +13,6 @@ export const showSuccess = (message) => {
   });
 };
 
-// Error notifications
 export const showError = (message) => {
   return toast.error(message, {
     position: "top-right",
@@ -26,7 +25,7 @@ export const showError = (message) => {
   });
 };
 
-// Info notifications
+
 export const showInfo = (message) => {
   return toast.info(message, {
     position: "top-right",
@@ -39,7 +38,7 @@ export const showInfo = (message) => {
   });
 };
 
-// Warning notifications
+
 export const showWarning = (message) => {
   return toast.warning(message, {
     position: "top-right",
@@ -52,7 +51,7 @@ export const showWarning = (message) => {
   });
 };
 
-// Loading notifications (auto-close manually)
+
 export const showLoading = (message) => {
   return toast.loading(message, {
     position: "top-right",
@@ -64,7 +63,7 @@ export const showLoading = (message) => {
   });
 };
 
-// Custom notifications with options
+
 export const showCustom = (message, type = 'info', options = {}) => {
   return toast[type](message, {
     position: "top-right",
@@ -78,17 +77,17 @@ export const showCustom = (message, type = 'info', options = {}) => {
   });
 };
 
-// Dismiss a specific toast
+
 export const dismissToast = (toastId) => {
   toast.dismiss(toastId);
 };
 
-// Dismiss all toasts
+
 export const dismissAllToasts = () => {
   toast.dismiss();
 };
 
-// Promise-based toast (for async operations)
+
 export const showPromise = (promise, messages) => {
   return toast.promise(
     promise,

@@ -13,13 +13,13 @@ export default function AdminDashboard() {
   const { data: proposals = [], isLoading: proposalsLoading } = useGetBuyerProposalsQuery();
   const { data: systemHealth, isLoading: healthLoading } = useGetSystemHealthQuery();
 
-  // Calculate statistics
+  
   const totalUsers = buyers.length;
   const activeRfps = rfps.filter(rfp => rfp.status === "Sent").length;
   const totalVendors = vendors.length;
   const completedRfps = rfps.filter(rfp => rfp.status === "Awarded" || rfp.status === "Closed").length;
 
-  // Get system status with fallbacks
+  
   const getSystemStatus = () => {
     if (healthLoading || !systemHealth) {
       return {

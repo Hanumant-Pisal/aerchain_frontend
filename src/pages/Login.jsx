@@ -23,7 +23,6 @@ export default function Login() {
       navigate("/dashboard");
     } catch (error) {
       console.error("Login failed:", error);
-      // Error is now handled by the API toast notification
     } finally {
       setIsLoading(false);
     }
@@ -31,7 +30,6 @@ export default function Login() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-600 via-purple-500 to-pink-500 flex items-center justify-center p-4">
-      {/* Login card */}
       <div className="w-full max-w-md">
         <div className="bg-white shadow-2xl rounded-3xl p-8">
           

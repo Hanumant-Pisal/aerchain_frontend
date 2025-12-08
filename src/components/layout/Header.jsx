@@ -1,8 +1,6 @@
 import React from "react";
 
-/**
- * Small page header with title and optional actions area
- */
+
 export default function Header({ title, subtitle, children }) {
   return (
     <div className="mb-6">

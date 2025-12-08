@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 export default function VendorProposals() {
   const user = useSelector((state) => state.auth.user);
   const { data: proposals = [], isLoading, error } = useGetVendorProposalsQuery(undefined, {
-    // Force refetch when user changes
+    
     refetchOnMountOrArgChange: true,
     skip: !user,
   });
@@ -45,7 +45,7 @@ export default function VendorProposals() {
   return (
     <Layout>
       <div className="p-6">
-        {/* Modern Header */}
+        
         <div className="mb-8">
           <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-900 to-pink-700 bg-clip-text text-transparent">
             My Proposals
@@ -65,7 +65,7 @@ export default function VendorProposals() {
           </div>
         ) : (
           <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-            {/* List Header */}
+           
             <div className="p-4 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-gray-100">
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-semibold text-gray-800">Proposal List</h3>
@@ -73,25 +73,25 @@ export default function VendorProposals() {
               </div>
             </div>
 
-            {/* Proposal List */}
+          
             <div className="divide-y divide-gray-100">
               {proposals.map((proposal) => (
                 <div key={proposal._id} className="hover:bg-gray-50 transition-colors">
-                  {/* List Item - Always Visible */}
+                  
                   <div 
                     className="p-4 cursor-pointer"
                     onClick={() => setSelectedProposal(selectedProposal === proposal._id ? null : proposal._id)}
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center flex-1 min-w-0">
-                        {/* Proposal Icon */}
+                       
                         <div className="w-10 h-10 bg-gradient-to-br from-green-600 to-emerald-600 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
                           <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                           </svg>
                         </div>
                         
-                        {/* Proposal Info */}
+                       
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center mb-1">
                             <h4 className="text-base font-semibold text-gray-800 truncate">
@@ -134,7 +134,7 @@ export default function VendorProposals() {
                         </div>
                       </div>
 
-                      {/* Expand/Collapse Icon */}
+                      
                       <div className="ml-3 flex-shrink-0">
                         <svg 
                           className={`w-5 h-5 text-gray-400 transition-transform duration-200 ${
@@ -150,11 +150,11 @@ export default function VendorProposals() {
                     </div>
                   </div>
 
-                  {/* Expanded Details */}
+                  
                   {selectedProposal === proposal._id && (
                     <div className="px-4 pb-4 border-t border-gray-100">
                       <div className="pt-4">
-                        {/* Key Metrics */}
+                       
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
                           <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-3 rounded-lg border border-blue-200">
                             <p className="text-xs text-blue-600 font-medium">Total Price</p>
@@ -182,7 +182,7 @@ export default function VendorProposals() {
                           </div>
                         </div>
 
-                        {/* Score and Completeness */}
+                      
                         <div className="flex items-center space-x-4 mb-4">
                           <div className="bg-gray-50 px-3 py-2 rounded-lg">
                             <span className="text-xs text-gray-600">Score: </span>
@@ -194,7 +194,7 @@ export default function VendorProposals() {
                           </div>
                         </div>
 
-                        {/* Line Items */}
+                       
                         {proposal.parsed?.lineItems && proposal.parsed.lineItems.length > 0 && (
                           <div className="mb-4">
                             <h5 className="text-sm font-semibold text-gray-700 mb-2">Proposed Items</h5>
@@ -215,7 +215,7 @@ export default function VendorProposals() {
                           </div>
                         )}
 
-                        {/* Additional Notes */}
+                        
                         {proposal.aiSummary && (
                           <div className="mb-4">
                             <h5 className="text-sm font-semibold text-gray-700 mb-2">Additional Notes</h5>
@@ -225,7 +225,7 @@ export default function VendorProposals() {
                           </div>
                         )}
 
-                        {/* Contact and Submission Details */}
+                       
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                           <div>
                             <h5 className="text-sm font-semibold text-gray-700 mb-2">Contact Information</h5>
@@ -248,7 +248,7 @@ export default function VendorProposals() {
                           </div>
                         </div>
 
-                        {/* Attachments */}
+                     
                         {proposal.attachments && proposal.attachments.length > 0 && (
                           <div className="mb-4">
                             <h5 className="text-sm font-semibold text-gray-700 mb-2">Attachments</h5>
@@ -264,7 +264,7 @@ export default function VendorProposals() {
                           </div>
                         )}
 
-                        {/* Action Buttons */}
+                        
                         <div className="flex justify-end space-x-2">
                           <button className="px-4 py-2 text-sm border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors font-medium">
                             Edit Proposal

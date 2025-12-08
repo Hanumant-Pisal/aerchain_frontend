@@ -1,5 +1,5 @@
 import Layout from "../components/layout/Layout";
-import { useState, useMemo, useRef } from "react";
+import { useState, useMemo, useRef, useCallback } from "react";
 import { useGetBuyerProposalsQuery } from "../features/proposals/proposalApi";
 import { Link } from "react-router-dom";
 import React from "react";
@@ -9,7 +9,6 @@ export default function BuyerProposals() {
   const [selectedRfp, setSelectedRfp] = useState(null);
   const proposalCardsRef = useRef(null);
 
-  // Group proposals by RFP
   const proposalsByRfp = useMemo(() => {
     return proposals.reduce((acc, proposal) => {
       const rfpId = proposal.rfp?._id;
@@ -24,13 +23,17 @@ export default function BuyerProposals() {
     }, {});
   }, [proposals]);
 
-  const rfpList = Object.values(proposalsByRfp);
+  const rfpList = useMemo(() => Object.values(proposalsByRfp), [proposalsByRfp]);
+  
+  const selectedRfpData = useMemo(() => 
+    rfpList.find(r => r.rfp._id === selectedRfp), 
+    [rfpList, selectedRfp]
+  );
 
-  const handleViewProposals = (rfpId) => {
+  const handleViewProposals = useCallback((rfpId) => {
     const newSelectedRfp = selectedRfp === rfpId ? null : rfpId;
     setSelectedRfp(newSelectedRfp);
     
-    // Scroll to proposal cards after a short delay to allow DOM update
     if (newSelectedRfp) {
       setTimeout(() => {
         proposalCardsRef.current?.scrollIntoView({ 
@@ -39,7 +42,7 @@ export default function BuyerProposals() {
         });
       }, 100);
     }
-  };
+  }, [selectedRfp]);
 
   if (isLoading) {
     return (
@@ -181,7 +184,7 @@ export default function BuyerProposals() {
               </div>
             </div>
 
-            {/* Proposal Cards for Selected RFP */}
+           
             {selectedRfp && (
               <div ref={proposalCardsRef} className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
                 <div className="p-4 border-b border-gray-100 bg-gradient-to-r from-blue-50 to-indigo-100">
@@ -194,7 +197,7 @@ export default function BuyerProposals() {
                       </div>
                       <div>
                         <h3 className="text-lg font-semibold text-gray-800">
-                          {rfpList.find(r => r.rfp._id === selectedRfp)?.rfp.title || "Unknown RFP"}
+                          {selectedRfpData?.rfp.title || "Unknown RFP"}
                         </h3>
                         <p className="text-sm text-gray-600">Submitted Proposals</p>
                       </div>
@@ -212,9 +215,9 @@ export default function BuyerProposals() {
 
                 <div className="p-6">
                   <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-                    {rfpList.find(r => r.rfp._id === selectedRfp)?.proposals.map((proposal) => (
+                    {selectedRfpData?.proposals.map((proposal) => (
                       <div key={proposal._id} className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all duration-200">
-                        {/* Card Header */}
+                       
                         <div className="p-4 border-b border-gray-100">
                           <div className="flex items-center justify-between mb-3">
                             <div className="flex items-center">
@@ -241,7 +244,7 @@ export default function BuyerProposals() {
                             </span>
                           </div>
                           
-                          {/* Price Badge */}
+                          
                           <div className="flex items-center justify-center">
                             <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-bold bg-green-100 text-green-800 border border-green-200">
                               ${proposal.parsed?.totalPrice?.toLocaleString() || 'N/A'}
@@ -249,9 +252,9 @@ export default function BuyerProposals() {
                           </div>
                         </div>
 
-                        {/* Card Content */}
+                       
                         <div className="p-4">
-                          {/* Key Metrics */}
+                        
                           <div className="grid grid-cols-2 gap-3 mb-4">
                             <div className="bg-blue-50 p-3 rounded-lg border border-blue-100">
                               <p className="text-xs text-blue-600 font-medium mb-1">Delivery</p>
@@ -270,7 +273,7 @@ export default function BuyerProposals() {
                             </div>
                           </div>
 
-                          {/* Line Items Preview */}
+                         
                           {proposal.parsed?.lineItems && proposal.parsed.lineItems.length > 0 && (
                             <div className="mb-4">
                               <p className="text-xs font-medium text-gray-500 mb-2">Items ({proposal.parsed.lineItems.length})</p>
@@ -288,7 +291,7 @@ export default function BuyerProposals() {
                             </div>
                           )}
 
-                          {/* AI Summary Preview */}
+                        
                           {proposal.aiSummary && (
                             <div className="mb-4">
                               <p className="text-xs font-medium text-gray-500 mb-2">AI Summary</p>
@@ -298,7 +301,7 @@ export default function BuyerProposals() {
                             </div>
                           )}
 
-                          {/* Footer */}
+                          
                           <div className="flex items-center justify-between pt-3 border-t border-gray-100">
                             <div className="flex items-center text-xs text-gray-500">
                               <svg className="w-3 h-3 mr-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -318,8 +321,8 @@ export default function BuyerProposals() {
                     ))}
                   </div>
 
-                  {/* RFP Level Actions */}
-                  {rfpList.find(r => r.rfp._id === selectedRfp)?.proposals.length > 1 && (
+                  
+                  {selectedRfpData?.proposals.length > 1 && (
                     <div className="mt-6 pt-4 border-t border-gray-200">
                       <div className="flex justify-center">
                         <Link

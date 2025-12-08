@@ -170,7 +170,7 @@ export default function Sidebar({ className = "" }) {
     <aside className={`w-76 h-screen fixed left-0 top-0 hidden md:block bg-gradient-to-br from-purple-600 via-purple-500 to-pink-500 border-r border-purple-400 ${className}`}>
       <div className="h-full flex flex-col">
         
-        {/* Logo Section */}
+       
         <div className="p-6">
           <Link to="/dashboard" className="flex items-center space-x-3">
            
@@ -180,7 +180,7 @@ export default function Sidebar({ className = "" }) {
           </Link>
         </div>
 
-        {/* Navigation */}
+       
         <div className="flex-1 p-6 overflow-y-auto">
           <nav className="space-y-6">
             {getSidebarItems()}

@@ -1,9 +1,6 @@
 import React from "react";
 
-/**
- * Simple modal. Parent controls open/close.
- * onClose should set open=false in parent.
- */
+
 export default function Modal({ open, title, onClose, children, size = "md" }) {
   if (!open) return null;
 

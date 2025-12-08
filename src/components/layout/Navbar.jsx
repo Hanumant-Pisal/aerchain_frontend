@@ -15,13 +15,13 @@ export default function Navbar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleLogout = () => {
-    // Clear all RTK Query cache data before logging out
+    
     dispatch(rfpApi.util.resetApiState());
     dispatch(vendorApi.util.resetApiState());
     dispatch(proposalApi.util.resetApiState());
     dispatch(authApi.util.resetApiState());
     
-    // Then logout and redirect
+    
     dispatch(logout());
     setIsDropdownOpen(false);
     navigate("/login");
@@ -29,7 +29,7 @@ export default function Navbar() {
 
   const getNavigationLinks = () => {
     if (!auth?.user) return null;
-    return null; // No navigation links for now
+    return null; 
   };
 
   const getRoleBadge = () => {
@@ -84,7 +84,7 @@ export default function Navbar() {
                   </svg>
                 </button>
 
-                {/* Dropdown Menu */}
+               
                 {isDropdownOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
                     <div className="px-4 py-3 border-b border-gray-100">

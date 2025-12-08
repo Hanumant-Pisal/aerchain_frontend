@@ -23,23 +23,23 @@ const baseQueryWithRetry = async (args, api, extraOptions) => {
 export const proposalApi = createApi({
   reducerPath: "proposalApi",
   baseQuery: baseQueryWithRetry,
-  tagTypes: ['Proposal'],
-  keepUnusedDataFor: 60,
+  tagTypes: ['Proposal', 'RFP'],
+  keepUnusedDataFor: 300, 
   endpoints: (builder) => ({
     getVendorProposals: builder.query({
       query: () => "/vendor",
       providesTags: ['Proposal'],
-      keepUnusedDataFor: 30
+      keepUnusedDataFor: 180 
     }),
     getBuyerProposals: builder.query({
       query: () => "/buyer",
       providesTags: ['Proposal'],
-      keepUnusedDataFor: 30
+      keepUnusedDataFor: 180 
     }),
     compareRfpProposals: builder.query({
       query: (rfpId) => `/compare/${rfpId}`,
-      providesTags: ['Proposal'],
-      keepUnusedDataFor: 300
+      providesTags: ['Proposal', 'RFP'],
+      keepUnusedDataFor: 600 
     }),
     submitProposal: builder.mutation({
       query: (data) => ({
@@ -48,10 +48,12 @@ export const proposalApi = createApi({
         body: data,
       }),
       invalidatesTags: ['Proposal'],
-      onQueryStarted: async (arg, { queryFulfilled }) => {
+      onQueryStarted: async (arg, { queryFulfilled, dispatch }) => {
         try {
           await queryFulfilled;
           showSuccess("Proposal submitted successfully! You will receive a confirmation email.");
+          
+          dispatch(proposalApi.util.invalidateTags(['Proposal']));
         } catch (error) {
           showError(error.error?.data?.message || "Failed to submit proposal");
         }

@@ -1,9 +1,6 @@
 import React from "react";
 
-/**
- * Tabs accepts tabs = [{ id, label }]
- * activeId, onChange
- */
+
 export default function Tabs({ tabs = [], activeId, onChange }) {
   return (
     <div className="border-b bg-white">

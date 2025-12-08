@@ -1,8 +1,6 @@
 import React from "react";
 
-/**
- * Controlled/uncontrolled input wrapper
- */
+
 export default function Input({ label, name, type = "text", value, onChange, placeholder, className = "", ...rest }) {
   return (
     <div className={`flex flex-col ${className}`}>

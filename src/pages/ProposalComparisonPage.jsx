@@ -2,19 +2,17 @@ import Layout from "../components/layout/Layout";
 import { useParams } from "react-router-dom";
 import { useGetRfpQuery } from "../features/rfps/rfpApi";
 import { useCompareRfpProposalsQuery } from "../features/proposals/proposalApi";
+import { useMemo, useCallback } from "react";
 
 export default function ProposalComparisonPage() {
   const { id } = useParams();
   
-  // Helper function to map "Vendor 1", "Vendor 2" etc. to actual vendor names
-  const getVendorNameFromReference = (vendorReference, vendors) => {
+  const getVendorNameFromReference = useCallback((vendorReference, vendors) => {
     if (!vendorReference || !vendors) return vendorReference;
     
-    // Extract the number from "Vendor 1", "Vendor 2", etc.
     const match = vendorReference.match(/Vendor (\d+)/);
     if (match && match[1]) {
-      const vendorRank = parseInt(match[1]); // This is the rank (1, 2, etc.)
-      // Find vendor by rank instead of array index
+      const vendorRank = parseInt(match[1]); 
       const vendor = vendors.find(v => v.rank === vendorRank);
       if (vendor && vendor.vendor) {
         return vendor.vendor.name;
@@ -22,7 +20,7 @@ export default function ProposalComparisonPage() {
     }
     
     return vendorReference;
-  };
+  }, []);
   
   if (!id || id === "undefined") {
     return (
@@ -96,7 +94,6 @@ export default function ProposalComparisonPage() {
   return (
     <Layout>
       <div className="p-4 max-w-7xl mx-auto">
-        {/* Modern Header */}
         <div className="mb-6">
           <div className="flex items-center justify-between mb-4">
             <div>
@@ -124,11 +121,8 @@ export default function ProposalComparisonPage() {
           </div>
         </div>
 
-        {/* Main Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* AI Recommendation - Full Width */}
           <div className="lg:col-span-3">
-            {/* AI Recommendation - Compact */}
             <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 rounded-xl shadow-sm border border-blue-200 p-6">
               <div className="flex items-start">
                 <div className="flex-shrink-0">
@@ -168,10 +162,8 @@ export default function ProposalComparisonPage() {
             </div>
           </div>
 
-          {/* Key Factors Section */}
           <div className="lg:col-span-3">
 
-            {/* Key Factors - Compact */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
               <div className="flex items-center mb-4">
                 <div className="w-8 h-8 bg-gradient-to-br from-purple-600 to-pink-600 rounded-lg flex items-center justify-center mr-3">
@@ -216,9 +208,7 @@ export default function ProposalComparisonPage() {
             </div>
           </div>
 
-          {/* Bottom Section - Risk Analysis & AI Summary */}
           <div className="lg:col-span-3 grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Risk Analysis */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
               <div className="flex items-center mb-4">
                 <div className="w-8 h-8 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-lg flex items-center justify-center mr-3">
@@ -260,7 +250,6 @@ export default function ProposalComparisonPage() {
               )}
             </div>
 
-            {/* AI Summary */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
               <div className="flex items-center mb-4">
                 <div className="w-8 h-8 bg-gradient-to-br from-gray-600 to-gray-800 rounded-lg flex items-center justify-center mr-3">

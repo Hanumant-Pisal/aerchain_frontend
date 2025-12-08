@@ -28,7 +28,7 @@ export default function EditRFP() {
       await updateRfp({ id, ...formData });
       navigate("/rfps");
     } catch (error) {
-      // Error is handled by the API toast notification
+      
     }
   };
 

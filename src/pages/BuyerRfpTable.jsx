@@ -18,7 +18,7 @@ export default function RfpList() {
       try {
         await deleteRfp(id);
       } catch (error) {
-        // Error is handled by the API toast notification
+        
       } finally {
         setDeletingId(null);
       }
@@ -29,7 +29,7 @@ export default function RfpList() {
     const newSelectedRfp = selectedRfp === rfpId ? null : rfpId;
     setSelectedRfp(newSelectedRfp);
     
-    // Scroll to details after a short delay to allow DOM update
+    
     if (newSelectedRfp) {
       setTimeout(() => {
         detailsRef.current?.scrollIntoView({ 
@@ -119,7 +119,7 @@ export default function RfpList() {
   return (
     <Layout>
       <div className="p-6">
-        {/* Header with Create Button */}
+       
         <div className="mb-8">
           <div className="flex items-center justify-between">
             <div>
@@ -158,7 +158,7 @@ export default function RfpList() {
           </div>
         ) : (
           <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-            {/* Table Header */}
+            
             <div className="p-4 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-gray-100">
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-semibold text-gray-800">RFP List</h3>
@@ -166,7 +166,7 @@ export default function RfpList() {
               </div>
             </div>
 
-            {/* Table */}
+           
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead className="bg-gray-50 border-b border-gray-200">
@@ -367,12 +367,12 @@ export default function RfpList() {
                         </td>
                       </tr>
                       
-                      {/* Inline Details Row */}
+                     
                       {selectedRfp === rfp._id && (
                         <tr>
                           <td colSpan="6" className="px-0 py-0 bg-gray-50">
                             <div ref={detailsRef} className="p-6 border-l-4 border-purple-500">
-                              {/* Details Header */}
+                             
                               <div className="mb-6">
                                 <h3 className="text-xl font-bold text-gray-900 mb-2">{rfp.title}</h3>
                                 <div className="flex items-center space-x-4">
@@ -393,7 +393,7 @@ export default function RfpList() {
                                 </div>
                               </div>
 
-                              {/* Description */}
+                              
                               <div className="mb-6">
                                 <h4 className="text-lg font-semibold text-gray-900 mb-3">Description</h4>
                                 <div className="bg-white rounded-lg p-4 border border-gray-200">
@@ -401,7 +401,7 @@ export default function RfpList() {
                                 </div>
                               </div>
 
-                              {/* Key Metrics */}
+                             
                               <div className="mb-6">
                                 <h4 className="text-lg font-semibold text-gray-900 mb-3">RFP Details</h4>
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -455,7 +455,7 @@ export default function RfpList() {
                                 </div>
                               </div>
 
-                              {/* Technical Specifications */}
+                             
                               {rfp.structured?.technicalSpecs && rfp.structured.technicalSpecs.length > 0 && (
                                 <div className="mb-6">
                                   <h4 className="text-lg font-semibold text-gray-900 mb-3">Technical Specifications</h4>
@@ -479,7 +479,7 @@ export default function RfpList() {
                                 </div>
                               )}
 
-                              {/* Evaluation Criteria */}
+                              
                               {rfp.structured?.evaluationCriteria && rfp.structured.evaluationCriteria.length > 0 && (
                                 <div className="mb-6">
                                   <h4 className="text-lg font-semibold text-gray-900 mb-3">Evaluation Criteria</h4>
@@ -503,7 +503,7 @@ export default function RfpList() {
                                 </div>
                               )}
 
-                              {/* Attachments */}
+                             
                               {rfp.attachments && rfp.attachments.length > 0 && (
                                 <div className="mb-6">
                                   <h4 className="text-lg font-semibold text-gray-900 mb-3">Attachments</h4>
@@ -522,7 +522,7 @@ export default function RfpList() {
                                 </div>
                               )}
 
-                              {/* Action Buttons */}
+                             
                               <div className="flex justify-end space-x-3">
                                 {rfp.status === 'Draft' && (
                                   <>
