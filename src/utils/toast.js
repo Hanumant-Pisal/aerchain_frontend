@@ -1,112 +1,50 @@
 import { toast } from 'react-toastify';
 
-
-export const showSuccess = (message) => {
-  return toast.success(message, {
-    position: "top-right",
-    autoClose: 3000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    theme: "light",
-  });
+const defaultOptions = {
+  position: "top-right",
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  theme: "light",
 };
 
-export const showError = (message) => {
-  return toast.error(message, {
-    position: "top-right",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    theme: "light",
-  });
-};
-
-
-export const showInfo = (message) => {
-  return toast.info(message, {
-    position: "top-right",
-    autoClose: 3000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    theme: "light",
-  });
-};
-
-
-export const showWarning = (message) => {
-  return toast.warning(message, {
-    position: "top-right",
-    autoClose: 4000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    theme: "light",
-  });
-};
-
-
-export const showLoading = (message) => {
-  return toast.loading(message, {
-    position: "top-right",
+const typeDefaults = {
+  success: { autoClose: 3000 },
+  error: { autoClose: 5000 },
+  info: { autoClose: 3000 },
+  warning: { autoClose: 4000 },
+  loading: { 
+    autoClose: false,
     closeOnClick: false,
     closeButton: false,
     pauseOnHover: false,
     draggable: false,
-    theme: "light",
-  });
+  },
 };
 
+export const showSuccess = (message) => toast.success(message, { ...defaultOptions, ...typeDefaults.success });
+export const showError = (message) => toast.error(message, { ...defaultOptions, ...typeDefaults.error });
+export const showInfo = (message) => toast.info(message, { ...defaultOptions, ...typeDefaults.info });
+export const showWarning = (message) => toast.warning(message, { ...defaultOptions, ...typeDefaults.warning });
+export const showLoading = (message) => toast.loading(message, { ...defaultOptions, ...typeDefaults.loading });
 
-export const showCustom = (message, type = 'info', options = {}) => {
-  return toast[type](message, {
-    position: "top-right",
-    autoClose: 3000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    theme: "light",
-    ...options
-  });
-};
+export const showCustom = (message, type = 'info', options = {}) => 
+  toast[type](message, { ...defaultOptions, ...typeDefaults[type], ...options });
 
+export const dismissToast = (toastId) => toast.dismiss(toastId);
+export const dismissAllToasts = () => toast.dismiss();
 
-export const dismissToast = (toastId) => {
-  toast.dismiss(toastId);
-};
-
-
-export const dismissAllToasts = () => {
-  toast.dismiss();
-};
-
-
-export const showPromise = (promise, messages) => {
-  return toast.promise(
+export const showPromise = (promise, messages = {}) => 
+  toast.promise(
     promise,
     {
       pending: messages.pending || 'Processing...',
       success: messages.success || 'Success!',
       error: messages.error || 'Something went wrong',
     },
-    {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      theme: "light",
-    }
+    defaultOptions
   );
-};
 
 export default {
   showSuccess,

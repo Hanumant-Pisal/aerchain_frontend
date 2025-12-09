@@ -1,12 +1,12 @@
 import { useSelector } from "react-redux";
+import { useMemo } from "react";
 
 export default function useAuth() {
   const auth = useSelector((state) => state.auth);
-  console.log("useAuth check - auth state:", auth);
-  return !!auth.token;
+  return useMemo(() => !!auth.token, [auth.token]);
 }
 
 export function useUserRole() {
   const auth = useSelector((state) => state.auth);
-  return auth.user?.role || null;
+  return useMemo(() => auth.user?.role || null, [auth.user?.role]);
 }

@@ -1,10 +1,8 @@
 import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
+import { formatDate } from '../../utils/helpers';
 
 const ProposalCard = memo(({ proposal, isSelected, onToggle }) => {
-  const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString();
-  };
 
   return (
     <div className="border border-gray-200 rounded-xl p-4 hover:border-purple-300 transition-all duration-200">

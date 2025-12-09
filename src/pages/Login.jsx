@@ -1,9 +1,8 @@
 import { useLoginMutation } from "../features/auth/authApi";
 import { setCredentials } from "../features/auth/authSlice";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { useState, useCallback } from "react";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -11,22 +10,22 @@ export default function Login() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      console.log("Attempting login...");
-      const res = await login({ email: e.target.email.value, password: e.target.password.value }).unwrap();
-      console.log("Login successful:", res);
+      const res = await login({ 
+        email: e.target.email.value, 
+        password: e.target.password.value 
+      }).unwrap();
       dispatch(setCredentials(res));
-      console.log("Credentials set, navigating to dashboard...");
       navigate("/dashboard");
     } catch (error) {
-      console.error("Login failed:", error);
+      // Error handling is managed by RTK Query and toast notifications
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [login, dispatch, navigate]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-600 via-purple-500 to-pink-500 flex items-center justify-center p-4">
@@ -109,7 +108,7 @@ export default function Login() {
           <div className="mt-8 text-center">
             <p className="text-sm text-gray-600">
               Don't have an account?{" "}
-              <Link to="/vendor-register" className="font-medium text-purple-600 hover:text-purple-700 transition-colors">
+              <Link to="/register" className="font-medium text-purple-600 hover:text-purple-700 transition-colors">
                 Sign up
               </Link>
             </p>
