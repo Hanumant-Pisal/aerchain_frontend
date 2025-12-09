@@ -3,7 +3,7 @@ import Dashboard from "../pages/Dashboard";
 import AdminDashboard from "../pages/AdminDashboard";
 import VendorDashboard from "../pages/VendorDashboard";
 import Login from "../pages/Login";
-import VendorRegister from "../pages/VendorRegister";
+import Register from "../pages/Register";
 import CreateRFP from "../pages/CreateRFP";
 import EditRFP from "../pages/EditRFP";
 import RfpList from "../pages/BuyerRfpTable";
@@ -36,7 +36,7 @@ export default function AppRouter() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
-      <Route path="/vendor-register" element={<VendorRegister />} />
+      <Route path="/register" element={<Register />} />
       {isAuth ? (
         <>
           <Route path="/" element={<Navigate to="/dashboard" replace />} />

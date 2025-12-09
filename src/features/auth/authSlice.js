@@ -1,23 +1,42 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const token = localStorage.getItem("token");
-const user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null;
+const getInitialState = () => {
+  try {
+    const token = localStorage.getItem("token");
+    const user = localStorage.getItem("user");
+    return {
+      token: token || null,
+      user: user ? JSON.parse(user) : null
+    };
+  } catch (error) {
+    console.warn("Failed to parse user from localStorage:", error);
+    return { token: null, user: null };
+  }
+};
 
 const authSlice = createSlice({
   name: "auth",
-  initialState: { token: token || null, user: user },
+  initialState: getInitialState(),
   reducers: {
     setCredentials: (state, { payload }) => {
       state.token = payload.token;
       state.user = payload.user;
-      localStorage.setItem("token", payload.token);
-      localStorage.setItem("user", JSON.stringify(payload.user));
+      try {
+        localStorage.setItem("token", payload.token);
+        localStorage.setItem("user", JSON.stringify(payload.user));
+      } catch (error) {
+        console.warn("Failed to save credentials to localStorage:", error);
+      }
     },
     logout: (state) => {
       state.token = null;
       state.user = null;
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
+      try {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+      } catch (error) {
+        console.warn("Failed to remove credentials from localStorage:", error);
+      }
     },
   },
 });

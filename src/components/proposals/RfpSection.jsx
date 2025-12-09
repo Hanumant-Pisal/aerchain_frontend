@@ -1,11 +1,9 @@
 import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 import ProposalCard from './ProposalCard';
+import { formatDate } from '../../utils/helpers';
 
 const RfpSection = memo(({ rfp, proposals, selectedProposalId, onProposalToggle }) => {
-  const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString();
-  };
 
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
