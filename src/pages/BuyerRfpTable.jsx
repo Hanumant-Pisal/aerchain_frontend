@@ -432,68 +432,44 @@ export default function RfpList() {
                                   <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-4 rounded-lg border border-purple-200">
                                     <div className="flex items-center mb-2">
                                       <svg className="w-5 h-5 text-purple-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
                                       </svg>
-                                      <span className="text-sm font-medium text-purple-800">Deadline</span>
+                                      <span className="text-sm font-medium text-purple-800">Payment Terms</span>
                                     </div>
                                     <p className="text-lg font-bold text-purple-900 truncate">
-                                      {rfp.structured?.deadline ? new Date(rfp.structured.deadline).toLocaleDateString() : 'N/A'}
+                                      {rfp.structured?.paymentTerms || 'N/A'}
                                     </p>
                                   </div>
                                   
                                   <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 p-4 rounded-lg border border-yellow-200">
                                     <div className="flex items-center mb-2">
                                       <svg className="w-5 h-5 text-yellow-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                                       </svg>
-                                      <span className="text-sm font-medium text-yellow-800">Category</span>
+                                      <span className="text-sm font-medium text-yellow-800">Warranty</span>
                                     </div>
                                     <p className="text-lg font-bold text-yellow-900 truncate">
-                                      {rfp.structured?.category || 'N/A'}
+                                      {rfp.structured?.warranty || 'N/A'}
                                     </p>
                                   </div>
                                 </div>
                               </div>
 
                              
-                              {rfp.structured?.technicalSpecs && rfp.structured.technicalSpecs.length > 0 && (
+                              {rfp.structured?.items && rfp.structured.items.length > 0 && (
                                 <div className="mb-6">
-                                  <h4 className="text-lg font-semibold text-gray-900 mb-3">Technical Specifications</h4>
+                                  <h4 className="text-lg font-semibold text-gray-900 mb-3">Items Required</h4>
                                   <div className="bg-gray-50 rounded-lg p-4">
                                     <div className="space-y-3">
-                                      {rfp.structured.technicalSpecs.map((spec, index) => (
+                                      {rfp.structured.items.map((item, index) => (
                                         <div key={index} className="flex justify-between items-center bg-white p-3 rounded-lg border border-gray-200">
                                           <div className="flex-1">
-                                            <h5 className="font-medium text-gray-900">{spec.name}</h5>
-                                            <p className="text-sm text-gray-600 mt-1">{spec.description}</p>
+                                            <h5 className="font-medium text-gray-900">{item.name}</h5>
+                                            <p className="text-sm text-gray-600 mt-1">{item.specs}</p>
                                           </div>
                                           <div className="ml-4 text-right">
                                             <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 border border-blue-200">
-                                              Required
-                                            </span>
-                                          </div>
-                                        </div>
-                                      ))}
-                                    </div>
-                                  </div>
-                                </div>
-                              )}
-
-                              
-                              {rfp.structured?.evaluationCriteria && rfp.structured.evaluationCriteria.length > 0 && (
-                                <div className="mb-6">
-                                  <h4 className="text-lg font-semibold text-gray-900 mb-3">Evaluation Criteria</h4>
-                                  <div className="bg-gray-50 rounded-lg p-4">
-                                    <div className="space-y-3">
-                                      {rfp.structured.evaluationCriteria.map((criteria, index) => (
-                                        <div key={index} className="flex justify-between items-center bg-white p-3 rounded-lg border border-gray-200">
-                                          <div className="flex-1">
-                                            <h5 className="font-medium text-gray-900">{criteria.name}</h5>
-                                            <p className="text-sm text-gray-600 mt-1">{criteria.description}</p>
-                                          </div>
-                                          <div className="ml-4 text-right">
-                                            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800 border border-purple-200">
-                                              {criteria.weight}% weight
+                                              Qty: {item.qty}
                                             </span>
                                           </div>
                                         </div>
