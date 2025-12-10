@@ -77,7 +77,43 @@ export default function VendorRfps() {
             </div>
 
             <div className="overflow-x-auto">
-              <table className="w-full">
+              {/* Mobile Card View */}
+              <div className="md:hidden space-y-4 p-4">
+                {rfps.map((rfp) => (
+                  <div key={rfp._id} className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
+                    <div className="flex justify-between items-start mb-3">
+                      <h3 className="font-semibold text-gray-900 text-sm flex-1 mr-2">{rfp.title}</h3>
+                      <span className="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800">
+                        {rfp.status}
+                      </span>
+                    </div>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex justify-between">
+                        <span className="text-gray-500">Date:</span>
+                        <span className="text-gray-900">{new Date(rfp.createdAt).toLocaleDateString()}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-500">Budget:</span>
+                        <span className="text-gray-900">${rfp.structured?.budget || 'N/A'}</span>
+                      </div>
+                    </div>
+                    <div className="mt-4 pt-3 border-t border-gray-100">
+                      <Link
+                        to={`/rfps/${rfp._id}`}
+                        className="inline-flex items-center px-3 py-2 bg-purple-600 text-white text-sm font-medium rounded-lg hover:bg-purple-700 transition-colors"
+                      >
+                        View Details
+                        <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Desktop Table View */}
+              <table className="w-full hidden md:block">
                 <thead className="bg-gray-50 border-b border-gray-200">
                   <tr>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">

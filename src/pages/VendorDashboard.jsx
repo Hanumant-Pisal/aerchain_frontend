@@ -43,7 +43,7 @@ export default function VendorDashboard() {
         </div>
 
        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
           <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-xl border border-blue-200 hover:shadow-lg transition-shadow duration-300">
             <div className="flex items-center justify-between mb-2">
               <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
